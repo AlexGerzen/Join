@@ -1,0 +1,715 @@
+.contacts-section {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    box-sizing: border-box;
+}
+
+.contact-list {
+    overflow-y: scroll;
+    box-shadow: 3px 5px 8px rgb(0 0 0 / 20%);
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    background: rgb(255, 255, 255);
+    height: calc(100% - 100px);
+    padding-bottom: 25px;
+}
+
+.contact-overlay-name {
+    background: url(../img/contact_form_user.png) no-repeat;
+    background-position: right 15px top 15px;
+}
+
+.contact-overlay-email {
+    background: url(../img/contact_form_email.png) no-repeat;
+    background-position: right 15px top 15px;
+}
+
+.contact-overlay-phone {
+    background: url(../img/contact_form_phone.png) no-repeat;
+    background-position: right 15px top 15px;
+}
+
+.contacts-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 0%;
+    background-color: rgb(246, 247, 248);
+}
+
+.contacts-header {
+    margin-left: 48px;
+    display: flex;
+    align-items: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    background-color: rgb(246, 247, 248);
+}
+
+.contacts-headline {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 73.2px;
+    width: 180px;
+    height: 73px;
+    padding-right: 32px;
+}
+
+.contacts-divider {
+    width: 0px;
+    height: 45px;
+    border: 2px solid rgb(41, 171, 226);
+    background-color: rgb(41, 171, 226);
+}
+
+.contacts-headline-small {
+    font-weight: 400px;
+    font-size: 27px;
+    line-height: 32.4px;
+    padding: 8px;
+    padding-left: 32px;
+
+}
+
+.user-contact-button {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    bottom: 100px;
+    right: 235px;
+    font-size: 18px;
+    font-weight: 700;
+    width: 200px;
+    border-radius: 10px;
+    padding: 12px;
+    background-color: rgb(44, 54, 70);
+    color: white;
+    gap: 10px;
+    border: none;
+    z-index: 99;
+    cursor: pointer;
+}
+
+.user-contact-button:active {
+    background-color: rgb(9, 25, 49) !important;
+    ;
+}
+
+.button-hover:hover {
+    background-color: rgb(83, 168, 223);
+    transform: scale(1.02);
+    transition: all 100ms ease-in-out;
+    box-shadow: 0px 3px 6px rgb(190, 190, 190);
+}
+
+.selected-contact {
+    height: 100vh;
+    width: 450px;
+    margin-left: 48px;
+}
+
+.contact-initialen {
+    width: 84px;
+    height: 84px;
+    border-radius: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    border: 3px solid white;
+}
+
+.contact-user-initiale {
+    width: 84px;
+    height: 84px;
+    border-radius: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    border: 3px solid white;
+}
+
+.contact-member {
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+
+.contact-task {
+    color: rgb(41, 171, 226);
+    cursor: pointer;
+}
+
+.contact-letter {
+    font-size: 20px;
+    font-weight: 400px;
+    padding-bottom: 10px;
+    height: 30px;
+    margin-left: 30px;
+    padding-left: 23px;
+    margin-top: 30px;
+    margin-right: 30px;
+    border-bottom: 1px solid rgb(209, 209, 209);
+}
+
+.contact-initialen-small {
+    border-radius: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    border: 1px solid white;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+}
+
+.contact-list-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    flex-direction: row;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 11px;
+    margin-top: 10px;
+    margin-left: 23px;
+    margin-right: 30px;
+}
+
+.contact-list-box:hover {
+    cursor: pointer;
+    background-color: rgb(246, 247, 248);
+}
+
+.contact-list-name {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.contact-list-email {
+    color: rgb(0, 124, 238);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.contact-card-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.contact-card {
+    margin-top: 25px;
+}
+
+.selected-contact {
+    animation: rightSlideIn 0.5s;
+}
+
+@keyframes rightSlideIn {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.contact-info-box {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 35px;
+    gap: 35px;
+}
+
+.contact-info {
+    font-size: 25px;
+}
+
+.contact-info-details {
+    font-size: 16px;
+    font-weight: 700;
+    width: 50px;
+    padding-top: 40px;
+    padding-bottom: 15px;
+}
+
+.contact-info-details2 {
+    font-size: 16px;
+    font-weight: 700;
+    width: 50px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+.contact-edit {
+    padding-right: 15px;
+}
+
+.contact-edit:hover {
+    color: rgb(41, 171, 226);
+    cursor: pointer;
+}
+
+.contact-edit-pen {
+    margin-bottom: -3px;
+}
+
+.contact-edit-pen:hover {
+    color: rgb(41, 171, 226);
+    cursor: pointer;
+}
+
+#contact-trash:hover {
+    color: rgb(41, 171, 226);
+    cursor: pointer;
+}
+
+.d-none {
+    display: none;
+}
+
+.contact-overlay-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(600%);
+    transition: transform 0.5s ease-in-out;
+}
+
+.contact-overlay-box-animate {
+    transform: translateX(0%);
+}
+
+.contact-overlay-container {
+    background-color: rgba(239, 243, 245, 0.20);
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.contact-overlay-container-section {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-overlay-section {
+    background-color: rgb(44, 54, 70);
+    width: 300px;
+    height: 416px;
+    padding-left: 46px;
+    padding-right: 46px;
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.contact-overlay-headline {
+    font-size: 40px;
+    font-weight: 700;
+    color: white;
+    line-height: 51px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.contact-overlay-subheadline {
+    font-size: 19px;
+    font-weight: 400px;
+    color: white;
+    line-height: 23px;
+}
+
+.contact-overlay-logo {
+    height: 46.2px;
+    width: 38.5px;
+}
+
+.contact-overlay-divider {
+    border: 2px solid rgb(41, 171, 226);
+    background-color: rgb(41, 171, 226);
+    width: 0px;
+    height: 90px;
+    transform: rotate(90deg);
+    margin-left: 46px;
+    margin-top: -42px;
+}
+
+.contact-overlay-form-section {
+    width: 500px;
+    height: 416px;
+    background-color: rgb(255, 255, 255);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.contact-overlay-icon-box {
+    width: 84px;
+    height: 84px;
+    background-color: rgb(209, 209, 209);
+    border-radius: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid white;
+}
+
+.contact-overlay-icon {
+    width: 28px;
+    height: 37.8px;
+}
+
+.contact-form-container input {
+    width: 270px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 15px;
+    font-size: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    color: rgb(209, 209, 209);
+    border: 1px solid rgb(209, 209, 209);
+}
+
+
+.contact-form-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.contact-overlay-form-box {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.close-form {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.contact-overlay-buttons {
+    margin-top: 30px;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.contact-cancel-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(42, 54, 71);
+    border-radius: 10px;
+    gap: 12px;
+    padding: 10px;
+    height: 40px;
+    font-size: 15px;
+}
+
+.contact-cancel-button:hover {
+    border: 2px solid rgb(83, 168, 223);
+    color: rgb(83, 168, 223);
+    transform: scale(1.02);
+    transition: all 100ms ease-in-out;
+    box-shadow: 0px 3px 6px rgb(190, 190, 190);
+    cursor: pointer;
+}
+
+.contact-cancel-button:active {
+    border: 2px solid rgb(9, 25, 49) !important;
+    color: rgb(9, 25, 49) !important;
+}
+
+.contact-cancel-button:hover img {
+    filter: brightness(0) saturate(100%) invert(60%) sepia(58%) saturate(453%) hue-rotate(161deg) brightness(92%) contrast(89%);
+}
+
+.contact-cancel-button:active img {
+    filter: brightness(0) saturate(100%) invert(9%) sepia(15%) saturate(3584%) hue-rotate(184deg) brightness(103%) contrast(101%) !important
+}
+
+.contact-create-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(44, 54, 70);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    gap: 12px;
+    padding: 10px;
+    margin-right: 55px;
+    height: 40px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.contact-create-button:hover {
+    background-color: rgb(83, 168, 223);
+    transform: scale(1.02);
+    transition: all 100ms ease-in-out;
+    box-shadow: 0px 3px 6px rgb(190, 190, 190);
+    cursor: pointer;
+}
+
+.contact-create-button:active {
+    background-color: rgb(9, 25, 49) !important;
+}
+
+.contact-delete-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(42, 54, 71);
+    border-radius: 10px;
+    gap: 12px;
+    padding: 10px;
+    height: 40px;
+    width: 65px;
+    font-size: 15px;
+}
+
+.contact-delete-button:hover {
+    border: 2px solid rgb(83, 168, 223);
+    color: rgb(83, 168, 223);
+    transform: scale(1.02);
+    transition: all 100ms ease-in-out;
+    box-shadow: 0px 3px 6px rgb(190, 190, 190);
+    cursor: pointer;
+}
+
+.contact-delete-button:active {
+    border: 1px solid rgb(9, 25, 49) !important;
+    color: rgb(9, 25, 49) !important;
+    ;
+}
+
+.contact-save-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(44, 54, 70);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: none;
+    gap: 12px;
+    padding: 10px;
+    margin-right: 65px;
+    height: 40px;
+    width: 130px;
+    font-size: 15px;
+}
+
+.contact-save-button:hover {
+    background-color: rgb(83, 168, 223);
+    transform: scale(1.02);
+    transition: all 100ms ease-in-out;
+    box-shadow: 0px 3px 6px rgb(190, 190, 190);
+    cursor: pointer;
+}
+
+.contact-save-button:active {
+    background-color: rgb(9, 25, 49) !important;
+}
+
+.close-form-mobile {
+    visibility: hidden;
+}
+
+.mobile-user-contact-button {
+    margin-right: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    color: white;
+    background-color: rgb(44, 54, 70);
+    border: 1px solid rgb(44, 54, 70);
+    border-radius: 10px;
+    gap: 12px;
+    padding: 10px;
+    height: 35px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    visibility: hidden;
+}
+
+.mobile-user-contact-button:hover {
+    background-color: rgb(83, 168, 223);
+    transform: scale(1.02);
+    transition: all 100ms ease-in-out;
+    box-shadow: 0px 3px 6px rgb(190, 190, 190);
+}
+
+.mobile-user-contact-button:active {
+    background-color: rgb(9, 25, 49) !important;
+}
+
+.mobile-contact-button-container {
+    position: fixed;
+    top: 70px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 20;
+    background: transparent;
+    visibility: hidden;
+}
+
+.overlay-section {
+    z-index: 99;
+}
+
+.contact-info-buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    right: 50px;
+    bottom: 170px;
+}
+
+.trash-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.edit-contact-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.change-background-color {
+    background-color: rgb(44, 54, 70);
+    color: white;
+}
+
+.change-background-color:hover {
+    background-color: rgb(44, 54, 70);
+}
+
+.popup-contact-created {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px 10px;
+    color: white;
+    background-color: rgb(44, 54, 70);
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.single-user {
+    background-color: rgb(246, 247, 248);
+}
+
+.contact-left-arrow {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    margin-top: 20px;
+    margin-right: 25px;
+    visibility: hidden;
+}
+
+.contact-kanban {
+    margin-top: 20px;
+    margin-left: 48px;
+    visibility: hidden;
+}
+
+.arrow-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 70%;
+}
+
+.delete-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: -3px;
+}
+
+.editorial {
+    display: flex;
+}
+
+.invisibility {
+    visibility: hidden;
+}
+
+.visibility {
+    visibility: visible;
+}
+
+.alert {
+    font-size: 12px;
+    color: red;
+    display: flex;
+    align-items: end;
+    height: 22px;
+}
+
+.noAlert {
+    font-size: 12px;
+    color: white;
+    display: flex;
+    align-items: end;
+    height: 22px;
+}
+
+.cancel-icon:hover {
+    filter: brightness(0) saturate(100%) invert(60%) sepia(58%) saturate(453%) hue-rotate(161deg) brightness(92%) contrast(89%);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

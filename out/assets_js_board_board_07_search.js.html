@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: assets/js/board/board_07_search.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: assets/js/board/board_07_search.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Decides on whether to use the search results or the full database to render the tasks.
+ * @param {boolean} newBoardSearch true = return search results; false = return database
+ * @returns JSON containing tasks
+ */
+function boardUseSearchResults(newBoardSearch) {
+
+    if (newBoardSearch == true || boardActiveSearch == true) {
+
+        return searchResults;
+    }
+    return database;
+}
+
+
+/**
+ * Removes start and end whitespace from the search input string. If the string then contains characters, it passes the input to the search function. Otherwise it re-renders the default board.
+ */
+function boardValidateSearchInput() {
+
+    let inputField;
+    searchResultsDatabaseIndexes = [];
+
+    if (window.innerWidth > 700) {inputField = document.getElementById('board-search-input-desktop');} else {
+        inputField = document.getElementById('board-search-input-mobile');
+    }
+    const userInput = inputField.value.trim();
+
+    if (userInput.length == 0) {
+        boardActiveSearch = false;
+        renderAllTaskCards();
+        boardCreateAllEventListeners();
+
+    } else {
+        boardActiveSearch = true;
+        boardSearch(userInput);
+    }
+}
+
+
+/**
+ * Iterates through the database and calls for every task the boardSearchTask function which creates the search results array. Then it calls functions to re-render the board using the search results.
+ * @param {string} userInput validated search input string typed by the user
+ */
+function boardSearch(userInput) {
+
+    searchResults = { "tasks": [] };
+
+    for (let i = 0; i &lt; database.tasks.length; i++) {
+        const task = database.tasks[i];
+
+        boardSearchTask(task, userInput, i);
+    }
+    renderAllTaskCards(true);
+    boardCreateAllEventListeners(true);
+}
+
+
+/**
+ * Checks if the input string is found in the title, description, category or assignees of the inputted task.
+ * @param {object} task task that is checked for fitting the search input
+ * @param {string} userInput validated search input string typed by the user
+ * @param {number} databaseIndex the index of the examined task in the database array
+ * @returns as soon as the task is found to fit the search input to decrease function run-time
+ */
+function boardSearchTask(task, userInput, databaseIndex) {
+
+    if (boardFieldIncludes(task.title, userInput) ||
+        boardFieldIncludes(task.description, userInput) ||
+        boardFieldIncludes(task.category, userInput)) {
+
+        boardSaveSearchResults(task);
+        searchResultsDatabaseIndexes.push(databaseIndex);
+        return;
+    }
+
+    for (let i = 0; i &lt; task.assigned_to.length; i++) {
+        const assignee = task.assigned_to[i];
+
+        if (boardFieldIncludes(assignee, userInput)) {
+
+            boardSaveSearchResults(task);
+            searchResultsDatabaseIndexes.push(databaseIndex);
+            return;
+        }
+    }
+}
+
+
+/**
+ * Checks if a specific input string matches the user search input. The test ignores capitalisation.
+ * @param {string} field value of a specific field in the task data 
+ * @param {*} userInput validated search input string typed by the user
+ * @returns true, when the field includes the user input
+ */
+function boardFieldIncludes(field, userInput) {
+    const fieldLowerCase = field.toLowerCase();
+    const userInputLowerCase = userInput.toLowerCase();
+
+    if (fieldLowerCase.includes(userInputLowerCase)) {
+        return true;
+    }
+}
+
+
+/**
+ * Saves a task in the search results JSON.
+ * @param {object} task task that is saved
+ */
+function boardSaveSearchResults(task) {
+
+    const taskAsString = JSON.stringify(task);
+    let searchResultsAsString = JSON.stringify(searchResults);
+
+    searchResultsAsString = searchResultsAsString.slice(0, -2);
+
+    if (searchResultsAsString.length > 20) {
+        searchResultsAsString = searchResultsAsString + ',' + taskAsString;
+
+    } else {
+        searchResultsAsString = searchResultsAsString + taskAsString;
+    }
+    searchResultsAsString = searchResultsAsString + ']}';
+    searchResults = JSON.parse(searchResultsAsString);
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#accountData">accountData</a></li><li><a href="global.html#activateAddTaskButton">activateAddTaskButton</a></li><li><a href="global.html#activatePhp">activatePhp</a></li><li><a href="global.html#activeInputfield">activeInputfield</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addContacts">addContacts</a></li><li><a href="global.html#addHoverEffect">addHoverEffect</a></li><li><a href="global.html#addSelectedPoint">addSelectedPoint</a></li><li><a href="global.html#addSubtask">addSubtask</a></li><li><a href="global.html#boardAddTaskTemplateSubtasks">boardAddTaskTemplateSubtasks</a></li><li><a href="global.html#boardCheckForSubtasks">boardCheckForSubtasks</a></li><li><a href="global.html#boardColumnRouter">boardColumnRouter</a></li><li><a href="global.html#boardComputeOffsetY">boardComputeOffsetY</a></li><li><a href="global.html#boardConfirmEditorChanges">boardConfirmEditorChanges</a></li><li><a href="global.html#boardCreateAllEventListeners">boardCreateAllEventListeners</a></li><li><a href="global.html#boardCreateEventListenerMouse">boardCreateEventListenerMouse</a></li><li><a href="global.html#boardCreateEventListenerTouch">boardCreateEventListenerTouch</a></li><li><a href="global.html#boardDeleteTask">boardDeleteTask</a></li><li><a href="global.html#boardDetailViewAssignees">boardDetailViewAssignees</a></li><li><a href="global.html#boardDetailViewCategory">boardDetailViewCategory</a></li><li><a href="global.html#boardDetailViewDescription">boardDetailViewDescription</a></li><li><a href="global.html#boardDetailViewDueDate">boardDetailViewDueDate</a></li><li><a href="global.html#boardDetailViewPriorityTag">boardDetailViewPriorityTag</a></li><li><a href="global.html#boardDetailViewSubtasks">boardDetailViewSubtasks</a></li><li><a href="global.html#boardDetailViewTitle">boardDetailViewTitle</a></li><li><a href="global.html#boardFieldIncludes">boardFieldIncludes</a></li><li><a href="global.html#boardGetPrioColor">boardGetPrioColor</a></li><li><a href="global.html#boardGetShortenedDescription">boardGetShortenedDescription</a></li><li><a href="global.html#boardHandleDragging">boardHandleDragging</a></li><li><a href="global.html#boardHandleWindowResize">boardHandleWindowResize</a></li><li><a href="global.html#boardHideAddtaskOverlay">boardHideAddtaskOverlay</a></li><li><a href="global.html#boardHidePlaceholder">boardHidePlaceholder</a></li><li><a href="global.html#boardHideTaskDetails">boardHideTaskDetails</a></li><li><a href="global.html#boardHideTaskEditor">boardHideTaskEditor</a></li><li><a href="global.html#boardIncludeAssignePickerOnAddTask">boardIncludeAssignePickerOnAddTask</a></li><li><a href="global.html#boardIncludeAssignePickerOnTaskEditor">boardIncludeAssignePickerOnTaskEditor</a></li><li><a href="global.html#boardInit">boardInit</a></li><li><a href="global.html#boardRemoveSubtask">boardRemoveSubtask</a></li><li><a href="global.html#boardRenderColumnPlaceholder">boardRenderColumnPlaceholder</a></li><li><a href="global.html#boardRenderDetailView">boardRenderDetailView</a></li><li><a href="global.html#boardRenderSubtasks">boardRenderSubtasks</a></li><li><a href="global.html#boardResetVariablesForDragging">boardResetVariablesForDragging</a></li><li><a href="global.html#boardSaveSearchResults">boardSaveSearchResults</a></li><li><a href="global.html#boardSearch">boardSearch</a></li><li><a href="global.html#boardSearchTask">boardSearchTask</a></li><li><a href="global.html#boardSetDropTargets">boardSetDropTargets</a></li><li><a href="global.html#boardSetMaximumDescriptionLength">boardSetMaximumDescriptionLength</a></li><li><a href="global.html#boardShowAddtaskOverlay">boardShowAddtaskOverlay</a></li><li><a href="global.html#boardShowPlaceholder">boardShowPlaceholder</a></li><li><a href="global.html#boardShowTaskDetails">boardShowTaskDetails</a></li><li><a href="global.html#boardShowTaskEditor">boardShowTaskEditor</a></li><li><a href="global.html#boardSubtasksProgress">boardSubtasksProgress</a></li><li><a href="global.html#boardSwitchResponsiveMode">boardSwitchResponsiveMode</a></li><li><a href="global.html#boardTaskEditorTemplateSubtasks">boardTaskEditorTemplateSubtasks</a></li><li><a href="global.html#boardTemplateAssigneePicker">boardTemplateAssigneePicker</a></li><li><a href="global.html#boardUpdateCoordinates">boardUpdateCoordinates</a></li><li><a href="global.html#boardUseSearchResults">boardUseSearchResults</a></li><li><a href="global.html#boardValidateSearchInput">boardValidateSearchInput</a></li><li><a href="global.html#changeContactColor">changeContactColor</a></li><li><a href="global.html#changeMobileView">changeMobileView</a></li><li><a href="global.html#changePassword">changePassword</a></li><li><a href="global.html#checkDragOverlapping">checkDragOverlapping</a></li><li><a href="global.html#checkDraggingOverDropContainer">checkDraggingOverDropContainer</a></li><li><a href="global.html#checkForAnimation">checkForAnimation</a></li><li><a href="global.html#checkForChangePassword">checkForChangePassword</a></li><li><a href="global.html#checkForLogin">checkForLogin</a></li><li><a href="global.html#checkIfUserExists">checkIfUserExists</a></li><li><a href="global.html#checkLogin">checkLogin</a></li><li><a href="global.html#checkNewPassword">checkNewPassword</a></li><li><a href="global.html#checkScreenSize">checkScreenSize</a></li><li><a href="global.html#clearAllFields">clearAllFields</a></li><li><a href="global.html#clearContacts">clearContacts</a></li><li><a href="global.html#clearCreateCategory">clearCreateCategory</a></li><li><a href="global.html#clearSignUpInput">clearSignUpInput</a></li><li><a href="global.html#clickOutsideDropdownMenu">clickOutsideDropdownMenu</a></li><li><a href="global.html#closeContactOverlay">closeContactOverlay</a></li><li><a href="global.html#closeCreateCategory">closeCreateCategory</a></li><li><a href="global.html#closeDropDownMenu">closeDropDownMenu</a></li><li><a href="global.html#closeMenuIfClickedOutside">closeMenuIfClickedOutside</a></li><li><a href="global.html#closeMobileVersion">closeMobileVersion</a></li><li><a href="global.html#closeOverlayEdit">closeOverlayEdit</a></li><li><a href="global.html#collectAllInfos">collectAllInfos</a></li><li><a href="global.html#columnSetOffsetY">columnSetOffsetY</a></li><li><a href="global.html#contactColor">contactColor</a></li><li><a href="global.html#containsBrackets">containsBrackets</a></li><li><a href="global.html#createCategory">createCategory</a></li><li><a href="global.html#createInitials">createInitials</a></li><li><a href="global.html#datePicker">datePicker</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteContatctsFromTask">deleteContatctsFromTask</a></li><li><a href="global.html#determineSubtasksProgress">determineSubtasksProgress</a></li><li><a href="global.html#disableAddTaskButton">disableAddTaskButton</a></li><li><a href="global.html#disableButton">disableButton</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#emailSent">emailSent</a></li><li><a href="global.html#emailSentAnimation">emailSentAnimation</a></li><li><a href="global.html#fillInData">fillInData</a></li><li><a href="global.html#findUpcomingDate">findUpcomingDate</a></li><li><a href="global.html#formateDate">formateDate</a></li><li><a href="global.html#generateRandomColor">generateRandomColor</a></li><li><a href="global.html#getAssigneeColor">getAssigneeColor</a></li><li><a href="global.html#getAwaitingFeedback">getAwaitingFeedback</a></li><li><a href="global.html#getCategory">getCategory</a></li><li><a href="global.html#getCategoryColor">getCategoryColor</a></li><li><a href="global.html#getClass">getClass</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getDataLocalStorage">getDataLocalStorage</a></li><li><a href="global.html#getDate">getDate</a></li><li><a href="global.html#getDescription">getDescription</a></li><li><a href="global.html#getDone">getDone</a></li><li><a href="global.html#getFirstLetters">getFirstLetters</a></li><li><a href="global.html#getForgotPwLink">getForgotPwLink</a></li><li><a href="global.html#getItem">getItem</a></li><li><a href="global.html#getItemLocalStorage">getItemLocalStorage</a></li><li><a href="global.html#getName">getName</a></li><li><a href="global.html#getPrio">getPrio</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#getRandomRGBColor">getRandomRGBColor</a></li><li><a href="global.html#getRange">getRange</a></li><li><a href="global.html#getTaskPrioBoard">getTaskPrioBoard</a></li><li><a href="global.html#getTasksInProgress">getTasksInProgress</a></li><li><a href="global.html#getTimeOfDay">getTimeOfDay</a></li><li><a href="global.html#getTitle">getTitle</a></li><li><a href="global.html#getTodo">getTodo</a></li><li><a href="global.html#getUpcomingDeadline">getUpcomingDeadline</a></li><li><a href="global.html#getUrgent">getUrgent</a></li><li><a href="global.html#getUsername">getUsername</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#handleDropping">handleDropping</a></li><li><a href="global.html#handleResize">handleResize</a></li><li><a href="global.html#htmlTemplateAllAssignees">htmlTemplateAllAssignees</a></li><li><a href="global.html#htmlTemplateAssigneeIcon">htmlTemplateAssigneeIcon</a></li><li><a href="global.html#htmlTemplateDropContainersDesktop">htmlTemplateDropContainersDesktop</a></li><li><a href="global.html#htmlTemplateDropContainersMobile">htmlTemplateDropContainersMobile</a></li><li><a href="global.html#htmlTemplateMoreThan3Assignees">htmlTemplateMoreThan3Assignees</a></li><li><a href="global.html#htmlTemplateTaskCard">htmlTemplateTaskCard</a></li><li><a href="global.html#htmlTemplateUpTo3Assignees">htmlTemplateUpTo3Assignees</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#includeUser">includeUser</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initContact">initContact</a></li><li><a href="global.html#initLogin">initLogin</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#initTask">initTask</a></li><li><a href="global.html#isDraggedElementOverBoardColumn">isDraggedElementOverBoardColumn</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#openAddContact">openAddContact</a></li><li><a href="global.html#openContactDetails">openContactDetails</a></li><li><a href="global.html#openCreateCategory">openCreateCategory</a></li><li><a href="global.html#openDropDownMenu">openDropDownMenu</a></li><li><a href="global.html#openForgotPw">openForgotPw</a></li><li><a href="global.html#openGapInTaskColumn">openGapInTaskColumn</a></li><li><a href="global.html#openLogin">openLogin</a></li><li><a href="global.html#openMobileGreeting">openMobileGreeting</a></li><li><a href="global.html#openNewContactForm">openNewContactForm</a></li><li><a href="global.html#openRegister">openRegister</a></li><li><a href="global.html#openResetPw">openResetPw</a></li><li><a href="global.html#passwordReset">passwordReset</a></li><li><a href="global.html#priority">priority</a></li><li><a href="global.html#pullDownMenu">pullDownMenu</a></li><li><a href="global.html#pushCategoryInCategorys">pushCategoryInCategorys</a></li><li><a href="global.html#pushStatus">pushStatus</a></li><li><a href="global.html#pushSubtask">pushSubtask</a></li><li><a href="global.html#removeAddClearIcons">removeAddClearIcons</a></li><li><a href="global.html#removeContactsForTask">removeContactsForTask</a></li><li><a href="global.html#removeHoverEffect">removeHoverEffect</a></li><li><a href="global.html#removeSelectedColor">removeSelectedColor</a></li><li><a href="global.html#removeSelectedPoint">removeSelectedPoint</a></li><li><a href="global.html#removeSubtask">removeSubtask</a></li><li><a href="global.html#renderAllTaskCards">renderAllTaskCards</a></li><li><a href="global.html#renderBoardColumn">renderBoardColumn</a></li><li><a href="global.html#renderCategorys">renderCategorys</a></li><li><a href="global.html#renderContactList">renderContactList</a></li><li><a href="global.html#renderContacts">renderContacts</a></li><li><a href="global.html#renderContactsAfterCreate">renderContactsAfterCreate</a></li><li><a href="global.html#renderFirstLetter">renderFirstLetter</a></li><li><a href="global.html#renderInitials">renderInitials</a></li><li><a href="global.html#renderSubtasks">renderSubtasks</a></li><li><a href="global.html#renderloggedInUserinContactList">renderloggedInUserinContactList</a></li><li><a href="global.html#replaceForbiddenCharacters">replaceForbiddenCharacters</a></li><li><a href="global.html#resetAllGapsInColumns">resetAllGapsInColumns</a></li><li><a href="global.html#resetForm">resetForm</a></li><li><a href="global.html#resetPrioButtom">resetPrioButtom</a></li><li><a href="global.html#resetSubTasks">resetSubTasks</a></li><li><a href="global.html#resetWarnings">resetWarnings</a></li><li><a href="global.html#returnTemplateForDropContainers">returnTemplateForDropContainers</a></li><li><a href="global.html#rotateTaskCard">rotateTaskCard</a></li><li><a href="global.html#saveDatabase">saveDatabase</a></li><li><a href="global.html#saveEditedUser">saveEditedUser</a></li><li><a href="global.html#saveNewCategory">saveNewCategory</a></li><li><a href="global.html#searchContactInfo">searchContactInfo</a></li><li><a href="global.html#searchContactwithEmail">searchContactwithEmail</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectedColor">selectedColor</a></li><li><a href="global.html#selectedForTask">selectedForTask</a></li><li><a href="global.html#sentMailToPhp">sentMailToPhp</a></li><li><a href="global.html#setAttribute">setAttribute</a></li><li><a href="global.html#setItem">setItem</a></li><li><a href="global.html#setItemLocalStorage">setItemLocalStorage</a></li><li><a href="global.html#setOnclickForColorpicker">setOnclickForColorpicker</a></li><li><a href="global.html#setStatus">setStatus</a></li><li><a href="global.html#setStyleforPrioButton">setStyleforPrioButton</a></li><li><a href="global.html#setTick">setTick</a></li><li><a href="global.html#showAddClearIcons">showAddClearIcons</a></li><li><a href="global.html#showInitialsOnTopBar">showInitialsOnTopBar</a></li><li><a href="global.html#showPassword1">showPassword1</a></li><li><a href="global.html#sideMenuColor">sideMenuColor</a></li><li><a href="global.html#signUpUser">signUpUser</a></li><li><a href="global.html#startEventListener">startEventListener</a></li><li><a href="global.html#subtaskEventListener">subtaskEventListener</a></li><li><a href="global.html#switchContactIcons">switchContactIcons</a></li><li><a href="global.html#switchHtml">switchHtml</a></li><li><a href="global.html#switchPasswordPicture">switchPasswordPicture</a></li><li><a href="global.html#switchSubtaskIcons">switchSubtaskIcons</a></li><li><a href="global.html#taskEditorAddSubtask">taskEditorAddSubtask</a></li><li><a href="global.html#taskEditorGetSubtaskStatus">taskEditorGetSubtaskStatus</a></li><li><a href="global.html#taskEditorInitAssigneePicker">taskEditorInitAssigneePicker</a></li><li><a href="global.html#taskEditorRenderData">taskEditorRenderData</a></li><li><a href="global.html#taskEditorRenderPrioButtons">taskEditorRenderPrioButtons</a></li><li><a href="global.html#taskEditorSaveContacts">taskEditorSaveContacts</a></li><li><a href="global.html#taskEditorSetCheckbox">taskEditorSetCheckbox</a></li><li><a href="global.html#taskEditorSubtaskTemplate">taskEditorSubtaskTemplate</a></li><li><a href="global.html#templateAddContactOverlay">templateAddContactOverlay</a></li><li><a href="global.html#templateContactDetails">templateContactDetails</a></li><li><a href="global.html#templateContactFirstLetters">templateContactFirstLetters</a></li><li><a href="global.html#templateContactList">templateContactList</a></li><li><a href="global.html#templateContactOverlayEdit">templateContactOverlayEdit</a></li><li><a href="global.html#updateContactSelection">updateContactSelection</a></li><li><a href="global.html#userCreatedSuccess">userCreatedSuccess</a></li><li><a href="global.html#validateForm">validateForm</a></li><li><a href="global.html#waitForAnimation">waitForAnimation</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Jul 30 2023 21:58:18 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
