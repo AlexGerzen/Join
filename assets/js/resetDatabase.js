@@ -167,3 +167,7 @@ let databaseJSON = {
         }
     ]
 }
+
+function resetData() {
+    setItem('database', databaseJSON);
+}
