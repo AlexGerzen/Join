@@ -224,7 +224,7 @@ function taskEditorSubtaskTemplate(i, name, status, containerId) {
     
             <div class="sub-task">
             <div onclick="taskEditorSetCheckbox(${i})" class="selectbox-subtask pointer">
-            <img class="subtaskDone ${taskEditorGetSubtaskStatus(status)}" id="taskEditorCheckmark${i}" src="./assets/img/create_subtask.png">
+            <img style="padding-bottom: 0;" class="subtaskDone ${taskEditorGetSubtaskStatus(status)}" id="taskEditorCheckmark${i}" src="./assets/img/create_subtask.png">
             </div>
             <div class="board-detail-view-subtask">${name}
             <img class="board-cursor-pointer" src="./assets/img/board/close.svg"

@@ -199,9 +199,8 @@ async function addContact() {
     disableButton();
     userCreatedSuccess();
     closeContactOverlay();
-    if (window.location.pathname == '/contacts.html') {
-        loadContacts();
-    }
+    loadContacts();
+    
 }
 
 

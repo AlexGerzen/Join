@@ -51,8 +51,7 @@ function switchPasswordPicture() {
         document.getElementById('showPassword').classList.add('d-none');
         document.getElementById('hidePassword').classList.add('d-none');
     }
-    else {
-        if (passwordInputType.type == "password") {
+    else if (passwordInputType.type == "password") {
             document.getElementById('lock').classList.add('d-none');
             document.getElementById('showPassword').classList.add('d-none')
             document.getElementById('hidePassword').classList.remove('d-none');
@@ -62,7 +61,7 @@ function switchPasswordPicture() {
             document.getElementById('showPassword').classList.remove('d-none')
             document.getElementById('hidePassword').classList.add('d-none');
         }
-    }
+    
 
 }
 
@@ -127,8 +126,15 @@ function activeInputfield(event) {
  */
 function handleResize() {
     let screenWidth = window.innerWidth;
-    if (screenWidth == 900) {
+    if (screenWidth <= 900 && !blocked) {
         waitForAnimation();
+        location.reload();
+        blocked = true;
+    }
+    if (screenWidth >= 900 && blocked) {
+        waitForAnimation();
+        location.reload();
+        blocked = false;
     }
 }
 

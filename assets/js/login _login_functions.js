@@ -4,6 +4,7 @@ let tickCount = 0;
 let changePasswordEmail;
 let currentPassword;
 let rememberMe = false;
+let blocked = false;
 
 //Init functions
 

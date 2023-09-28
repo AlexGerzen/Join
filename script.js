@@ -19,7 +19,7 @@ async function init() {
     await getItem('database');
     sideMenuColor();
     showInitialsOnTopBar();
-    userMenuEventListener()
+    userMenuEventListener();
 }
 
 
@@ -90,6 +90,7 @@ function showInitialsOnTopBar() {
     let topbarCircle = document.getElementById('loggedInUserInitials');
     topbarCircle.innerHTML = `${initialLetters}`;
     topbarCircle.style.color = `${searchContactInfo(false, 'color', currentEmail, 'email', 'contacts')}`;
+    console.log(currentEmail);
 }
 
 
@@ -112,6 +113,9 @@ function searchContactInfo(index, yoursearchResult, keyword, searchFilter, searc
                 return currentSearch[yoursearchResult];
             }
         }
+
+        
+
     }
 }
 
