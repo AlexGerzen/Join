@@ -288,7 +288,7 @@ function getUsername(forgotPwEmail) {
  * @returns It returns the Link which includes the email to reset the password
  */
 function getForgotPwLink(forgotPwEmail) {
-    let url = 'https://alex-gerzen.de/join/login.html?email=' + encodeURIComponent(forgotPwEmail);
+    let url = 'https://alex-gerzen.de/Join/login.html?email=' + encodeURIComponent(forgotPwEmail);
     return url;
 }
 
