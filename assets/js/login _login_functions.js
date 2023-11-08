@@ -304,12 +304,7 @@ function sentMailToPhp(forgotPwEmail) {  // Email wird das Php skript übergeben
     var email = forgotPwEmail;
 
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            // Erfolgreiche Antwort vom Server erhalten
-            console.log("E-Mail gesendet");
-        }
-    };
+    xmlhttp.onreadystatechange = function () {};
     xmlhttp.open("POST", "send_mail.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     var params = "username=" + encodeURIComponent(username) + "&link=" + encodeURIComponent(link) + "&email=" + encodeURIComponent(email);
@@ -322,12 +317,7 @@ function sentMailToPhp(forgotPwEmail) {  // Email wird das Php skript übergeben
  */
 function activatePhp() { //Php skript wird ausgeführt
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            // Erfolgreiche Antwort vom Server erhalten
-            console.log(this.responseText);
-        }
-    };
+    xmlhttp.onreadystatechange = function () {};
     xmlhttp.open("GET", "send_mail.php", true);
     xmlhttp.send();
 }

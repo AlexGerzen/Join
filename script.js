@@ -90,7 +90,6 @@ function showInitialsOnTopBar() {
     let topbarCircle = document.getElementById('loggedInUserInitials');
     topbarCircle.innerHTML = `${initialLetters}`;
     topbarCircle.style.color = `${searchContactInfo(false, 'color', currentEmail, 'email', 'contacts')}`;
-    console.log(currentEmail);
 }
 
 
