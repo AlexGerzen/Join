@@ -39,7 +39,8 @@
 <body onload="boardInit()">
 
     <div class="task-display-none-desktop create-button-top">
-        <button onclick="collectAllInfos()" id="mobileCreateTask" class="create-task-top spcae-evenly board-cursor-pointer board-display-none">
+        <button onclick="collectAllInfos()" id="mobileCreateTask"
+            class="create-task-top spcae-evenly board-cursor-pointer board-display-none">
             Create
             <img src="assets/img/create_task.png" alt="">
         </button>
@@ -154,7 +155,7 @@
             </div>
 
 
-            <div class="board-overlay board-display-none">
+            <div id="boardOverlay" onclick="checkForClosing(event)"  class="board-overlay board-display-none">
 
                 <div id="board-detail-view" class="board-display-none">
 
@@ -263,7 +264,8 @@
                     </div>
                 </div>
 
-                <div id="board-add-task" class="board-display-none" w3-include-html="./assets/templates/add_task_template.html">
+                <div id="board-add-task" class="board-display-none"
+                    w3-include-html="./assets/templates/add_task_template.html">
                 </div>
 
             </div>

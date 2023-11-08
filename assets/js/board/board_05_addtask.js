@@ -22,6 +22,17 @@ function boardShowAddtaskOverlay(progress) {
     document.getElementById('mobileCreateTask').classList.remove('board-display-none');
 }
 
+/**
+ * This function checks if a click happend outside of the add-task element
+ * 
+ * @param {event} event gives the data where the click happend
+ */
+function checkForClosing(event) {
+    if (event.target.id !== 'board-add-task') {
+        boardHideAddtaskOverlay();
+    }
+}
+
 
 /**
  * Hides the addtask overlay on the board.
@@ -29,7 +40,7 @@ function boardShowAddtaskOverlay(progress) {
 function boardHideAddtaskOverlay() {
 
     document.removeEventListener('click', closeMenuIfClickedOutside);
- 
+
     document.getElementById('board-add-task').classList.add('board-display-none');
     document.getElementById('board-add-task').parentNode.classList.add('board-display-none');
     document.getElementById('board-kanban').classList.remove('board-display-none-700px');
